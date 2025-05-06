@@ -1,0 +1,159 @@
+---
+description: Apply these rules when creating the project
+globs:
+alwaysApply: true
+---
+## Project Overview
+
+*   **Type:** Web Application (Rental Marketplace)
+*   **Description:** Modern rental marketplace platform for sports facilities, specifically indoor basketball courts on private land.
+*   **Primary Goal:** Solve the fragmented nature of renting indoor basketball courts through seamless renter and owner flows.
+
+## Project Structure
+
+### Framework-Specific Routing
+
+*   **Directory Rules:**
+
+    *   Next.js 14 (App Router): Enforce the `app/` directory with `app/[route]/page.tsx` conventions.
+    *   Next.js (Pages Router): Use `pages/[route].tsx` flat structure.
+    *   React Router 6: Use `src/routes/` with `createBrowserRouter`.
+
+### Core Directories
+
+*   **Versioned Structure:**
+
+    *   app: Next.js 14 App Router routes, layouts, and server components.
+    *   components: Reusable UI components (shadcn/ui-based).
+    *   lib: Shared utilities (database, auth, API clients).
+    *   public: Static assets (images, icons, fonts).
+    *   styles: Tailwind CSS configuration and global CSS.
+
+### Key Files
+
+*   **Stack-Versioned Patterns:**
+
+    *   app/layout.tsx → Next.js 14 root layout definition with `<html>` and `<body>` tags.
+    *   app/page.tsx → Next.js 14 root page component (home/search).
+    *   app/api/stripe-webhooks/route.ts → Next.js 14 API Route Handler for Stripe webhooks.
+    *   next.config.js → Next.js configuration (RSC experimental, image domains).
+    *   tailwind.config.js → Tailwind CSS v3 configuration with Retro Gatorade theme tokens.
+    *   postcss.config.js → PostCSS configuration for Tailwind.
+
+## Tech Stack Rules
+
+*   **Version Enforcement:**
+
+    *   next@14: App Router required, no `getInitialProps`, use React Server Components and server actions.
+    *   react@18: Enable concurrent features; use `useTransition` for pending states.
+    *   tailwindcss@3.3: Use JIT mode; define theme tokens for colors and typography.
+    *   @shadcn/ui@latest: Follow component and theming conventions; import via `components/ui`.
+    *   @fullcalendar/react@6: Use ESM imports and plugin-based calendar modules.
+    *   @supabase/auth-helpers-nextjs@latest: Use for server/client auth integration.
+    *   supabase@latest: Enforce Row-Level Security on all tables; use Realtime for booking updates.
+    *   stripe@latest: Use Payment Intents API; configure Connect for owner payouts.
+    *   @sendgrid/mail@7: Use transactional templates with template IDs.
+    *   twilio@latest: Plan for SMS/push (out-of-scope MVP); secure credentials via env vars.
+
+## PRD Compliance
+
+*   **Non-Negotiable:**
+
+    *   "Stable integrations (maps, calendar, payments, insurance)": Ensure robust error handling and fallback UIs for Google Maps, FullCalendar, Stripe, and CoverWallet.
+    *   "Polished, branded UI": Enforce Tailwind theme tokens and shadcn/ui theming for Retro Gatorade-inspired styling.
+    *   "Supabase RLS (renter, owner, admin)": All database queries must strictly enforce Row-Level Security policies.
+
+## App Flow Integration
+
+*   **Stack-Aligned Flow:**
+
+    *   Next.js 14 Auth Flow → `app/auth/(login|register)/page.tsx` with server actions and Supabase Auth Helpers.
+    *   Listings → `app/listings/page.tsx` (search results), `app/listings/[id]/page.tsx` (detail).
+    *   Booking → `app/book/[listingId]/page.tsx` (slot pick), `app/book/[listingId]/insurance/page.tsx` (CoverWallet widget), `app/book/[listingId]/payment/page.tsx` (Stripe Checkout).
+    *   Owner Dashboard → `app/dashboard/owner/page.tsx`, `app/dashboard/owner/bookings/page.tsx`, `app/dashboard/owner/payouts/page.tsx`.
+    *   Renter Dashboard → `app/dashboard/renter/page.tsx`, `app/dashboard/renter/bookings/page.tsx`.
+
+## Best Practices
+
+*   React 18
+    *   Use functional components and hooks.
+    *   Leverage concurrent rendering via `useTransition` and Suspense.
+    *   Optimize renders with `useMemo` and `useCallback`.
+
+*   Next.js 14
+    *   Structure routes in `app/` with Server and Client Components.
+    *   Centralize layouts in `app/layout.tsx` and nested layouts for consistent UI.
+    *   Implement API routes using `route.ts` in `app/api/`.
+
+*   Tailwind CSS 3.3
+    *   Enable JIT compiler and purge unused styles.
+    *   Define custom theme tokens for brand colors and typography.
+    *   Apply utility-first classes for responsive, accessible design.
+
+*   shadcn/ui
+    *   Import components from `components/ui` and customize via theme config.
+    *   Extend base components for custom variants.
+    *   Adhere to design token naming for consistency.
+
+*   FullCalendar
+    *   Register only required plugins (timeGrid, interaction).
+    *   Fetch events via server actions or RSC for SSR.
+    *   Virtualize long event lists to maintain performance.
+
+*   Google Maps JavaScript API
+    *   Lazy-load SDK with dynamic import.
+    *   Restrict API key to specific domains.
+    *   Debounce place-autocomplete inputs.
+
+*   Supabase
+    *   Enforce RLS policies on `listings`, `bookings`, and `users` tables.
+    *   Use `@supabase/auth-helpers-nextjs` for session management.
+    *   Leverage Realtime for live booking status updates.
+
+*   Stripe
+    *   Use Payment Intents with `stripe.redirectToCheckout`.
+    *   Secure webhooks in `app/api/stripe-webhooks/route.ts` with signature verification.
+    *   Implement Connect for owner payouts and account onboarding.
+
+*   CoverWallet
+    *   Dynamically import the embedded widget on the insurance step.
+    *   Provide fallback link to CoverWallet page if embedding fails.
+    *   Validate purchase response server-side before booking confirmation.
+
+*   SendGrid
+    *   Use pre-defined transactional templates.
+    *   Handle send errors with retry logic and alerts.
+    *   Validate email inputs client- and server-side.
+
+*   Twilio
+    *   Store credentials in environment variables.
+    *   Validate phone numbers with E.164 format.
+    *   Plan modular SMS service for future integration.
+
+## Rules
+
+*   Derive folder/file patterns directly from `techStackDoc` versions.
+*   If Next.js 14 App Router: Enforce `app/` directory with nested route folders.
+*   If Pages Router: Use `pages/*.tsx` flat structure.
+*   Mirror this logic for React Router, SvelteKit, etc.
+*   Never mix version patterns (e.g., no `pages/` in App Router projects).
+
+## Rules Metrics
+
+Before starting the project development, create a metrics file in the root of the project called
+
+`cursor_metrics.md`.
+
+### Instructions:
+
+*   Each time a cursor rule is used as context, update `cursor_metrics.md`.
+*   Use the following format for `cursor_metrics.md:`
+
+    # Rules Metrics
+
+    ## Usage
+    The number of times rules is used as context
+
+    *   rule-name.mdc: 5
+    *   another-rule.mdc: 2
+    *   ...other rules
