@@ -51,8 +51,15 @@ export async function GET(req: NextRequest) {
     cookies,
   });
 
-  // Fetch all listings
-  const { data, error } = await supabase.from('listings').select('*');
+  const { searchParams } = new URL(req.url);
+  const ownerId = searchParams.get('owner_id');
+
+  let query = supabase.from('listings').select('*');
+  if (ownerId) {
+    query = query.eq('owner_id', ownerId);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
