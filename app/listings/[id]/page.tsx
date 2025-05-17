@@ -26,4 +26,4 @@ export default function ListingDetailPage({ params }: { params: { id: string } }
       <p>Details for listing ID: {params.id} will be shown here.</p>
     </div>
   );
-}
+} 

@@ -7,4 +7,4 @@ export default function ListingsPage() {
       <p>Search controls and results will be displayed here.</p>
     </div>
   );
-}
+} 
