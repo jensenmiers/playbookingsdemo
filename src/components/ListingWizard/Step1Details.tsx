@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Select, SelectItem, SelectTrigger, SelectContent } from "@/components/ui/select";
+import { Input } from "src/components/ui/input";
+import { Textarea } from "src/components/ui/textarea";
+import { Label } from "src/components/ui/label";
+import { Select, SelectItem, SelectTrigger, SelectContent } from "src/components/ui/select";
 
 interface Step1DetailsProps {
   initialValues?: {

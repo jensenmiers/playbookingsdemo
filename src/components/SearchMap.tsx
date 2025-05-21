@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "src/components/ui/input";
+import { Button } from "src/components/ui/button";
 
 // Placeholder for Google Maps loader (to be implemented in /src/lib/google-maps.ts)
 // import { loadGoogleMaps } from "@/lib/google-maps";

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
+import { Label } from "src/components/ui/label";
+import { Checkbox } from "src/components/ui/checkbox";
+import { Switch } from "src/components/ui/switch";
+import { Button } from "src/components/ui/button";
 
 interface Step3AmenitiesProps {
   initialAmenities?: string[];

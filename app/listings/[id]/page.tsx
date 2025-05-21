@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import AvailabilityCalendar from "@/components/AvailabilityCalendar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import AvailabilityCalendar from "@/src/components/AvailabilityCalendar";
+import { Card, CardContent, CardHeader, CardTitle } from "src/components/ui/card";
 import Image from "next/image";
 
 interface Listing {

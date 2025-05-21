@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Label } from "src/components/ui/label";
+import { Input } from "src/components/ui/input";
+import { Button } from "src/components/ui/button";
 
 interface Step4PricingProps {
   initialValues?: {
