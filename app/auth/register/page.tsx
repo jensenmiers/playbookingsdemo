@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { signUpWithEmail } from '@/lib/auth';
+import { signUpWithEmail } from '@/lib/authClient';
 import { createSupabaseBrowserClient } from '@/lib/supabaseBrowserClient';
 import { useState } from 'react';
 
@@ -13,7 +13,7 @@ export default function RegisterPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleEmailRegister = async (e: React.FormEvent) => {
+  const handleEmailRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -67,7 +67,7 @@ export default function RegisterPage() {
             id="email"
             type="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             required
             autoComplete="email"
             disabled={loading}
@@ -79,7 +79,7 @@ export default function RegisterPage() {
             id="password"
             type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             required
             autoComplete="new-password"
             disabled={loading}
