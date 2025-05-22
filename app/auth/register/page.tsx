@@ -40,13 +40,13 @@ export default function RegisterPage() {
     <div className="max-w-md mx-auto py-10 space-y-6">
       <h1 className="text-2xl font-bold mb-4 text-center">Create your account</h1>
       <div className="space-y-3">
-        <Button
+        {/* <Button
           className="w-full bg-black text-white hover:bg-gray-900"
           onClick={() => handleSocialSignUp('apple')}
           disabled={loading}
         >
           Sign up with Apple
-        </Button>
+        </Button> */}
         <Button
           className="w-full bg-[#4285F4] text-white hover:bg-[#357ae8]"
           onClick={() => handleSocialSignUp('google')}
