@@ -19,7 +19,7 @@ export default function RegisterPage() {
     setError(null);
     try {
       await signUpWithEmail(email, password);
-      window.location.href = '/';
+      window.location.href = '/onboarding';
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -31,7 +31,12 @@ export default function RegisterPage() {
     setLoading(true);
     setError(null);
     const supabase = createSupabaseBrowserClient();
-    const { error } = await supabase.auth.signInWithOAuth({ provider });
+    const { error } = await supabase.auth.signInWithOAuth({ 
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/onboarding`
+      }
+    });
     if (error) setError(error.message);
     setLoading(false);
   };
